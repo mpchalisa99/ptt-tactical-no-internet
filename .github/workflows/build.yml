@@ -8,10 +8,14 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter create --project-name ptt_tactical . --platforms android
-      - run: flutter pub get
-      - run: flutter build apk --release
-      - uses: actions/upload-artifact@v4
+      - name: Generate Android Folder
+        run: flutter create --project-name ptt_tactical .
+      - name: Download Packages
+        run: flutter pub get
+      - name: Compile APK
+        run: flutter build apk --release
+      - name: Upload File APK
+        uses: actions/upload-artifact@v4
         with:
-          name: DISKOMLEKAU-TACTICAL-PTT
+          name: TACTICAL-PTT-APK
           path: build/app/outputs/flutter-apk/app-release.apk
